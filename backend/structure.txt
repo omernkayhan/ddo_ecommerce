@@ -1,0 +1,109 @@
+-Product *
+    /products (GET, POST)
+    /products/<product_id> (GET, PATCH, DELETE)
+    /products/<product_id>/full (GET)
+
+-ProductCategory *
+    /productCategories (GET, POST)
+    /productCategories/<category_id> (GET, PATCH, DELETE)
+
+-ProductConfiguration *
+    /productConfigurations (GET, POST)
+    /productConfigurations/<configuration_id> (GET, PATCH, DELETE)
+
+-Listing *
+    /listings (GET)
+    /listings/<listing_id> (GET)
+
+-Inventory
+    /inventories (GET)
+    /inventories/<listing_id> (GET)
+
+-Cart
+    /carts (GET, PATCH, DELETE)
+    /carts/<id> (POST, PATCH, DELETE)
+
+-Order
+    /orders (GET, POST)
+    /orders/<order_id> (GET, PATCH, DELETE)
+
+-Return
+    /returns (GET, POST)
+    /returns/<return_id> (GET, PATCH, DELETE)
+
+-User *
+    /admin/users (GET, POST)
+    /admin/users/<user_id> (GET, PATCH, DELETE)
+
+-Role *
+    /admin/roles (GET, POST)
+    /admin/roles/<role_id> (GET, PATCH, DELETE)
+
+-Permission *
+    /admin/permissions (GET, POST)
+    /admin/permissions/<permission_id> (GET, PATCH, DELETE)
+
+-ShipmentMethod *
+    /shipmentMethods (GET, POST)
+    /shipmentMethods/<shipment_id> (GET, PATCH, DELETE)
+
+-Tax *
+    /taxes (GET, POST)
+    /taxes/<tax_id> (GET, PATCH, DELETE)
+
+-Coupon
+    /coupons (GET, POST)
+    /coupons/<coupon_id> (GET, PATCH, DELETE)
+
+-Comment
+    /comments (GET, POST)
+    /comments/<comment_id> (GET, PATCH, DELETE)
+
+-Store *
+    /stores (GET, POST)
+    /stores/<store_id> (GET, PATCH, DELETE)
+
+-Vendor *
+    /vendors (GET, POST)
+    /vendors/<vendor_id> (GET, PATCH, DELETE)
+
+-PaymentMethod
+    /paymentMethods (GET, POST)
+    /paymentMethods/<method_id> (GET, PATCH, DELETE)
+
+-Payment
+    /payments (GET, POST)
+    /payments/<payment_id> (GET, PATCH, DELETE)
+
+-Discount *
+    /discounts (GET, POST)
+    /discounts/<discount_id> (GET, PATCH, DELETE)
+
+
+/*
+* 2023 - DISQET Software Technologies
+* created by: Ömer Necmi KAYHAN
+* created date: 10/07/2023
+*
+* Backend:
+*   Main Framework : Express JS
+*   Object Relational Mapping : Sequelize
+*   Token Control : Bearer
+*   Token Generator : bcrypt
+*   JSON Response Data Validator : ajv
+*
+*   - Auth
+*       JWT
+*   - Product
+*       - Product Category
+*       - Product Variant
+*       - Product Listing
+*   - User & Account
+*       - Account Addresses
+*       - Account Contact Information
+*   - Order
+*
+* Database:
+*   PostgreSQL
+*
+*/

@@ -1,0 +1,102 @@
+{
+  "status": true,
+  "data": {
+    "id": 3,
+    "price": 200,
+    "listingStartDateTime": "2023-07-19T08:38:50.000Z",
+    "createdAt": "2023-07-19T11:44:16.476Z",
+    "updatedAt": "2023-07-19T11:53:38.578Z",
+    "priceCurrencyCode": "USD",
+    "configuredProductId": 2,
+    "priceCurrency": {
+      "code": "USD",
+      "name": "Amerikan Doları"
+    },
+    "configuredProduct": {
+      "id": 2,
+      "weight": 1200,
+      "active": true,
+      "createdAt": "2023-07-19T11:16:57.419Z",
+      "updatedAt": "2023-07-19T11:16:57.435Z",
+      "productId": 1,
+      "vendorId": 1,
+      "product": {
+        "id": 1,
+        "sku": "SKU2",
+        "name": "name2",
+        "shortDescription": "short",
+        "description": "desc",
+        "sefLink": "sefl",
+        "online": true,
+        "active": false,
+        "createdAt": "2023-07-19T11:15:55.330Z",
+        "updatedAt": "2023-07-19T11:15:55.341Z",
+        "categoryId": 1,
+        "category": {
+          "id": 1,
+          "name": "Sub Level Category",
+          "sefLink": "test",
+          "active": true,
+          "parentId": null
+        },
+        "images": [
+          {
+            "id": 2,
+            "path": "DENEME.JPG"
+          }
+        ]
+      },
+      "configurations": [
+        {
+          "name": "bellek",
+          "type": "radio",
+          "configurationValue": {
+            "value": "8 GB"
+          }
+        }
+      ]
+    },
+    "oldPrices": [
+      {
+        "id": 3,
+        "price": 100,
+        "createdAt": "2023-07-19T11:44:16.530Z",
+        "priceCurrencyCode": "TRY",
+        "priceCurrency": {
+          "code": "TRY",
+          "name": "Türk Lirası"
+        }
+      },
+      {
+        "id": 7,
+        "price": 200,
+        "createdAt": "2023-07-19T11:54:54.108Z",
+        "priceCurrencyCode": "USD",
+        "priceCurrency": {
+          "code": "USD",
+          "name": "Amerikan Doları"
+        }
+      },
+      {
+        "id": 6,
+        "price": 200,
+        "createdAt": "2023-07-19T11:54:24.992Z",
+        "priceCurrencyCode": "USD",
+        "priceCurrency": {
+          "code": "USD",
+          "name": "Amerikan Doları"
+        }
+      },
+      {
+        "id": 5,
+        "price": 200,
+        "createdAt": "2023-07-19T11:53:38.573Z",
+        "priceCurrencyCode": "USD",
+        "priceCurrency": {
+          "code": "USD",
+          "name": "Amerikan Doları"
+        }
+      }
+    ]
+  }
+}
