@@ -6,20 +6,18 @@
 
 
 const Controller = require("../../common/Controller");
-const Vendor = require("../../common/models/Vendor");
+const Customer = require("../../common/models/Customer");
 const User = require("../../common/models/User");
 const {USER} = require("../../common/serializer");
-const Store = require("../../common/models/Store");
 const Role = require("../../common/models/Role");
 
-class VendorController extends Controller {
-    defaultModel = Vendor;
+class CustomerController extends Controller {
+    defaultModel = Customer;
 
     listPayload = {
         properties: [
             'id',
-            'vendorCustomData',
-            ['store', {type: 'integer'}],
+            'customerCustomData',
             [
                 'user',
                 {
@@ -42,8 +40,7 @@ class VendorController extends Controller {
     };
     createPayload = {
         properties: [
-            'vendorCustomData',
-            ['store', {type: 'integer'}],
+            'customerCustomData',
             [
                 'user',
                 {
@@ -63,12 +60,11 @@ class VendorController extends Controller {
             ]
         ],
         additionalProperties: false,
-        required: ['vendorCustomData', 'user', 'store']
+        required: ['customerCustomData', 'user']
     };
     updatePayload = {
         properties: [
-            'vendorCustomData',
-            ['store', {type: 'integer'}],
+            'customerCustomData',
             [
                 'user',
                 {
@@ -90,37 +86,27 @@ class VendorController extends Controller {
     };
 
     listSerializer = {
-        include: [{...USER.INCLUDE_BASIC_LEVEL, as: 'user'}, {
-            model: Store,
-            as: 'store',
-            attributes: ['id', 'title', 'storeName']
-        }], attributes: {exclude: ['userId', 'storeId']}
+        include: [{...USER.INCLUDE_BASIC_LEVEL, as: 'user'}], attributes: {exclude: ['userId', 'storeId']}
     };
     detailSerializer = {
-        include: [{...USER.INCLUDE_VENDOR_BASIC, as: 'user'}, {
-            model: Store,
-            as: 'store',
-            attributes: ['id', 'title', 'storeName']
-        }], attributes: {exclude: ['userId', 'storeId']}
+        include: [{...USER.INCLUDE_VENDOR_BASIC, as: 'user'}], attributes: {exclude: ['userId', 'storeId']}
     };
 
     create(req, res) {
-        super.create(req, res, async (vendor) => {
+        super.create(req, res, async (Customer) => {
             const user = await User.create({...req.body.user});
-            await user.setRole(await Role.findOne({where: {code: 'vendor'}}));
-            await vendor.setUser(await user);
-            await vendor.setStore(req.body.store);
+            await user.setRole(await Role.findOne({where: {code: 'customer'}}));
+            await Customer.setUser(await user);
         });
     }
 
     update(req, res) {
-        super.update(req, res, async (vendor) => {
-            const user = await User.findByPk(vendor.userId);
+        super.update(req, res, async (Customer) => {
+            const user = await User.findByPk(Customer.userId);
             await user.update(req.body.user);
-            if (typeof req.body.store !== 'undefined') await vendor.setStore(req.body.store);
         });
     }
 
 }
 
-module.exports = VendorController;
+module.exports = CustomerController;

@@ -4,6 +4,10 @@
 * created date: 14/07/2023
 */
 
+const test = require("../test");
+const {success} = require("./Response");
+const {authenticateCheck} = require("./middleware/IsAuthenticatedMiddleware");
+
 const AuthRouter = require("../apps/auth/router");
 const RoleRouter = require("../apps/admin/roles/router");
 const PermissionRouter = require("../apps/admin/permissions/router");
@@ -22,9 +26,8 @@ const CurrencyRouter = require("../apps/constants/currencies/router");
 const TaxRouter = require("../apps/constants/taxes/router");
 const DiscountRouter = require("../apps/discounts/router");
 const PaymentMethodRouter = require("../apps/paymentMethods/router");
-const test = require("../test");
-const {success} = require("./Response");
-const {authenticateCheck} = require("./middleware/IsAuthenticatedMiddleware");
+const CustomerRouter = require("../apps/customers/router");
+const CommentRouter = require("../apps/comments/router");
 
 module.exports = {
     routers: {},
@@ -54,6 +57,8 @@ module.exports = {
             taxRouter: new TaxRouter('/constants/taxes', Controllers.TaxController, app),
             discountRouter: new DiscountRouter('/discounts', Controllers.DiscountController, app),
             paymentMethodRouter: new PaymentMethodRouter('/paymentMethods', Controllers.PaymentMethodController, app),
+            customerRouter: new CustomerRouter('/customers', Controllers.CustomerController, app),
+            commentRouter: new CommentRouter('/comments', Controllers.CommentController, app),
         };
     },
     Admin: {
@@ -76,5 +81,7 @@ module.exports = {
     ConfiguredProductRouter,
     ListingRouter,
     DiscountRouter,
-    PaymentMethodRouter
+    PaymentMethodRouter,
+    CustomerRouter,
+    CommentRouter
 };

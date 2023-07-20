@@ -21,6 +21,8 @@ const CurrencyController = require("../apps/constants/currencies/controller");
 const TaxController = require("../apps/constants/taxes/controller");
 const DiscountController = require("../apps/discounts/controller");
 const PaymentMethodController = require("../apps/paymentMethods/controller");
+const CustomerController = require("../apps/customers/controller");
+const CommentController = require("../apps/comments/controller");
 
 module.exports = {
     AuthController,
@@ -40,4 +42,6 @@ module.exports = {
     TaxController,
     DiscountController,
     PaymentMethodController,
+    CustomerController,
+    CommentController,
 };

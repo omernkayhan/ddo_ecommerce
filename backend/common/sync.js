@@ -28,6 +28,8 @@ const Discount = require("./models/Discount");
 const PaymentMethod = require("./models/PaymentMethod");
 const ProductConfigurationValue = require("./models/ProductConfigurationValue");
 const UserToken = require("./models/UserToken");
+const Customer = require("./models/Customer");
+const Comment = require("./models/Comment");
 
 module.exports = {
     syncDB: async (sequelize) => {
@@ -248,6 +250,26 @@ module.exports = {
         await sequelize.models.UserToken.belongsTo(sequelize.models.User, {
             as: 'user',
             foreignKey: 'userId'
+        });
+
+
+        //Customer Model
+        await Customer.init();
+        await sequelize.models.Customer.belongsTo(sequelize.models.User, {
+            as: 'user',
+            foreignKey: 'userId'
+        });
+
+
+        //Customer Model
+        await Comment.init();
+        await sequelize.models.Comment.belongsTo(sequelize.models.Customer, {
+            as: 'customer',
+            foreignKey: 'customerId'
+        });
+        await sequelize.models.Comment.belongsTo(sequelize.models.Listing, {
+            as: 'listing',
+            foreignKey: 'listingId'
         });
 
         if (!DEV) {
