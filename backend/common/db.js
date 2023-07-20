@@ -7,7 +7,7 @@
 const {Sequelize, Model} = require("sequelize");
 const {options} = require("pg/lib/defaults");
 const {Logger} = require("sequelize/lib/utils/logger");
-const sequelize = new Sequelize('postgres://ddo_ecommerce_backend:1234@localhost:5432/ddo_ecommerce', {logging: true, force: false});
+const sequelize = new Sequelize('postgres://ddo_ecommerce_backend:1234@localhost:5432/ddo_ecommerce', {logging: false, force: false});
 
 class DataModel extends Model{
 
