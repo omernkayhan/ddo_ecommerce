@@ -1,0 +1,6 @@
+.idea/
+backend/node_modules/
+backend/logs/
+.gitignore
+/.idea/
+/.idea/

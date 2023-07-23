@@ -30,6 +30,11 @@ const ProductConfigurationValue = require("./models/ProductConfigurationValue");
 const UserToken = require("./models/UserToken");
 const Customer = require("./models/Customer");
 const Comment = require("./models/Comment");
+const CartItem = require("./models/CartItem");
+const Inventory = require("./models/Inventory");
+const OrderItem = require("./models/OrderItem");
+const Order = require("./models/Order");
+const Payment = require("./models/Payment");
 
 module.exports = {
     syncDB: async (sequelize) => {
@@ -270,6 +275,83 @@ module.exports = {
         await sequelize.models.Comment.belongsTo(sequelize.models.Listing, {
             as: 'listing',
             foreignKey: 'listingId'
+        });
+
+
+        //Inventory Model
+        await Inventory.init();
+        await sequelize.models.Inventory.belongsTo(sequelize.models.Listing, {
+            as: 'listing'
+        });
+        await sequelize.models.Inventory.belongsTo(sequelize.models.Currency, {
+            as: 'priceCurrency'
+        });
+
+
+        //CartItem Model
+        await CartItem.init();
+        await sequelize.models.CartItem.belongsTo(sequelize.models.Listing, {
+            as: 'listing'
+        });
+        await sequelize.models.CartItem.belongsTo(sequelize.models.Customer, {
+            as: 'customer'
+        });
+
+
+        //OrderItem Model
+        await OrderItem.init();
+        await sequelize.models.OrderItem.belongsTo(sequelize.models.ShipmentMethod, {
+            as: 'shipmentMethod'
+        });
+        await sequelize.models.OrderItem.belongsTo(sequelize.models.Listing, {
+            as: 'listing'
+        });
+        await sequelize.models.OrderItem.belongsToMany(sequelize.models.Tax, {
+            through: 'OrderItemTaxes',
+            as: 'taxes'
+        });
+        await sequelize.models.Tax.belongsToMany(sequelize.models.OrderItem, {
+            through: 'OrderItemTaxes',
+            as: 'taxes'
+        });
+        await sequelize.models.OrderItem.belongsTo(sequelize.models.Currency, {
+            as: 'priceCurrency'
+        });
+
+
+        //Order Model
+        await Order.init();
+        await sequelize.models.Order.hasMany(sequelize.models.OrderItem, {
+            as: 'items',
+            foreignKey: 'orderId'
+        });
+        await sequelize.models.OrderItem.belongsTo(sequelize.models.Order, {
+            as: 'order',
+            foreignKey: 'orderId'
+        });
+        await sequelize.models.Order.belongsTo(sequelize.models.Currency, {
+            as: 'totalCurrency'
+        });
+        await sequelize.models.Order.belongsTo(sequelize.models.Customer, {
+            as: 'customer'
+        });
+
+
+        //Payment Model
+        await Payment.init();
+        await sequelize.models.Payment.belongsTo(sequelize.models.PaymentMethod, {
+            as: 'paymentMethod'
+        });
+        await sequelize.models.Payment.belongsTo(sequelize.models.Currency, {
+            as: 'paidCurrency'
+        });
+        await sequelize.models.Payment.belongsTo(sequelize.models.Order, {
+            as: 'order',
+            foreignKey: 'orderId'
+        });
+        await sequelize.models.Order.hasOne(sequelize.models.Payment, {
+            as: 'payment',
+            foreignKey: 'orderId'
         });
 
         if (!DEV) {

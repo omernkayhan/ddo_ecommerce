@@ -5,6 +5,7 @@
 */
 
 const {Op} = require("sequelize");
+const {DATABASE} = require("../config");
 
 function decodeURIComponentSafe(s) {
     if (!s) {
@@ -20,8 +21,15 @@ module.exports = {
             if(key === 'page' || key === 'order') continue;
 
             if(key.indexOf('__') > -1) {
+                let operator = key.split('__')[1];
+                if(DATABASE.DIALECT === 'postgres') {
+                    operator = (operator === 'like') ? 'iLike' : operator;
+                    operator = (operator === 'notLike') ? 'notILike' : operator;
+                    operator = (operator === 'regexp') ? 'iRegexp' : operator;
+                    operator = (operator === 'notRegexp') ? 'notIRegexp' : operator;
+                }
                 value = {
-                    [Op[key.split('__')[1]]]: value
+                    [Op[operator]]: value
                 };
                 key = key.split('__')[0];
             }

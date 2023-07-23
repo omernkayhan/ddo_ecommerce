@@ -7,7 +7,7 @@
 const {Sequelize, Model} = require("sequelize");
 const {options} = require("pg/lib/defaults");
 const {Logger} = require("sequelize/lib/utils/logger");
-const sequelize = new Sequelize('postgres://ddo_ecommerce_backend:1234@localhost:5432/ddo_ecommerce', {logging: false, force: false});
+const sequelize = new Sequelize('postgres://ddo_ecommerce_backend:1234@localhost:5432/ddo_ecommerce', {logging: false, force: false, minifyAliases: true});
 
 class DataModel extends Model{
 
@@ -45,6 +45,14 @@ class DataModel extends Model{
 
     static async delete(object){
         return await object.destroy();
+    }
+
+    static async upsert(values, condition) {
+        const obj = await this.findOne({ where: condition })
+        if(obj)
+            return await obj.update(values);
+        return await this.create(values);
+
     }
 }
 

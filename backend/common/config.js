@@ -15,10 +15,25 @@ module.exports = {
     DEFAULT_PAGE_ITEM_COUNT: 10,
     ERROR_CODES: {
         FOREIGN_ID_NOT_FOUND: '5001',
-        FOREIGN_IS_REFERENCED: '5002'
+        FOREIGN_IS_REFERENCED: '5002',
+        ALREADY_EXISTS: '5003'
     },
     DEFAULT_ACTIVE_LISTING: false,
     PRODUCT:{
         CONFIGURATION_TYPE_OPTIONS: ['radio', 'select']
+    },
+    ORDER:{
+        STATUS_OPTIONS: ['created', 'waitingPayment', 'processing', 'gettingReady', 'readyForShipment', 'shipped', 'completed', 'canceled'],
+        NOT_PAYED_STATUS: 'waitingPayment',
+        PAYED_STATUS: 'processing',
+        STATUS_CHANGE_NOTE: '{number} Numaralı sipariş \'{status}\' durumuna geçti'
+    },
+    DATABASE: {
+        HOST: 'localhost',
+        PORT: 5432,
+        USER: 'ddo_ecommerce_backend',
+        PASSWORD: '1234',
+        DATABASE: 'ddo_ecommerce',
+        DIALECT: 'postgres',
     }
 };

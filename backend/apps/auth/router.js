@@ -6,6 +6,7 @@
 
 const {Router} = require("express");
 const {verify} = require("../../common/middleware/SchemeValidation");
+const {authenticateCheck} = require("../../common/middleware/IsAuthenticatedMiddleware");
 
 class AuthRouter extends Router{
 
@@ -29,6 +30,18 @@ class AuthRouter extends Router{
             },
             required: [
                 'username', 'password'
+            ],
+            additionalProperties: false
+        };
+        let refreshPayload = {
+            type: 'object',
+            properties: {
+                refreshToken: {
+                    type: 'string'
+                }
+            },
+            required: [
+                'refreshToken'
             ],
             additionalProperties: false
         };
@@ -74,6 +87,14 @@ class AuthRouter extends Router{
         this.app.post(endpointPrefix + '/login', [
             verify(loginPayload)
         ], this.controller.login.bind(this.controller));
+
+        this.app.post(endpointPrefix + '/logout', [
+            authenticateCheck([endpointPrefix, 'logout'])
+        ], this.controller.logout.bind(this.controller));
+
+        this.app.post(endpointPrefix + '/refresh', [
+            verify(refreshPayload)
+        ], this.controller.refresh.bind(this.controller));
 
     }
 }

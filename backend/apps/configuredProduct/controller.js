@@ -81,7 +81,6 @@ class ConfiguredProductController extends Controller {
             let configurationValues = {};
             items.forEach((item) => {
                 item.configurations.forEach((configuration) => {
-                    console.log(configuration);
                     if(typeof configurationValues[configuration.name] === 'undefined') configurationValues[configuration.name] = [];
                     if(!configurationValues[configuration.name].includes(configuration.configurationValue.value)) configurationValues[configuration.name].push(configuration.configurationValue.value);
                 })

@@ -33,7 +33,7 @@ class Controller{
     list(req, res){
         let search = {
             ...buildCondition(req),
-            order: (Object.keys(this.defaultModel.attributes).includes('id')) ? [['id', 'ASC']] : [],
+            order: (Object.keys(this.defaultModel.attributes).includes('id')) ? (req.order.length > 0 ? req.order : [['id', 'ASC']]) : (req.order.length > 0 ? req.order : []),
             ...this.listSerializer
         };
 

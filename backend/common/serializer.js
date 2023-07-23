@@ -16,6 +16,7 @@ const Currency = require("./models/Currency");
 const Vendor = require("./models/Vendor");
 const Store = require("./models/Store");
 const Discount = require("./models/Discount");
+const ConfiguredProduct = require("./models/ConfiguredProduct");
 
 const PERMISSION_ATTRIBUTES = {
     BASIC_LEVEL: ['id', 'code', 'name']
@@ -137,6 +138,49 @@ const PRODUCT = {
             as: 'discounts',
             attributes: ['name', 'type', 'value', 'active']
         }]
+    },
+    INCLUDE_FULL_CONFIGURED_PRODUCT: {
+        attributes: {exclude: ['configuredProductId', 'priceCurrencyCode']},
+        include: [
+            {model: Currency, as: 'priceCurrency'},
+            {
+                model: ConfiguredProduct, as: 'configuredProduct', attributes: {exclude: ['productId', 'vendorId']},
+                include: [{
+                    model: Vendor,
+                    as: 'vendor',
+                    attributes: [],
+                    include: {
+                        model: Store,
+                        as: 'store',
+                        attributes: ['id', 'storeName', 'logo', 'createdAt']
+                    }
+                }, {
+                    model: Product,
+                    as: 'product',
+                    attributes: {exclude: ['categoryId']},
+                    include: [{model: ProductCategory, as: 'category'}, {
+                        model: ProductImage,
+                        as: 'images',
+                        attributes: ['path']
+                    }, {
+                        model: Tax,
+                        as: 'taxes',
+                        attributes: {exclude: ['valueCurrencyCode']},
+                        include: {model: Currency, as: 'valueCurrency'},
+                        through: {attributes: []}
+                    }]
+                }, {
+                    model: ProductConfiguration,
+                    as: 'configurations',
+                    attributes: ['id', 'name', 'type'],
+                    through: {as: 'configurationValue', attributes: ['value']}
+                }, {
+                    model: Discount,
+                    as: 'discounts',
+                    attributes: ['name', 'type', 'value', 'active']
+                }]
+            }
+        ]
     }
 };
 

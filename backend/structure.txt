@@ -55,7 +55,7 @@
     /coupons (GET, POST)
     /coupons/<coupon_id> (GET, PATCH, DELETE)
 
--Comment
+-Comment *
     /comments (GET, POST)
     /comments/<comment_id> (GET, PATCH, DELETE)
 
@@ -78,6 +78,10 @@
 -Discount *
     /discounts (GET, POST)
     /discounts/<discount_id> (GET, PATCH, DELETE)
+
+-Customer *
+    /customer (GET, POST)
+    /customer/<customer_id> (GET, PATCH, DELETE)
 
 
 /*

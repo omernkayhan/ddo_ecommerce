@@ -20,6 +20,15 @@ module.exports = {
         if(req.limit < 0){
             return error(res, `Invalid Request: '__limit' parameter cannot be less than 0!`);
         }
+
+        const order = JSON.parse(req.query.__order ?? '[]');
+        if(typeof req.query.__order !== 'undefined') delete req.query.__order;
+        req.order = [];
+        for (const [column, orderType] of Object.entries(order)) {
+            req.order.push([column, orderType]);
+        }
+        console.log(req.order);
+
         next();
     }
 };

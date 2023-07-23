@@ -7,6 +7,8 @@
 const test = require("../test");
 const {success} = require("./Response");
 const {authenticateCheck} = require("./middleware/IsAuthenticatedMiddleware");
+const multer = require("multer");
+const {uuid} = require('uuidv4');
 
 const AuthRouter = require("../apps/auth/router");
 const RoleRouter = require("../apps/admin/roles/router");
@@ -28,6 +30,22 @@ const DiscountRouter = require("../apps/discounts/router");
 const PaymentMethodRouter = require("../apps/paymentMethods/router");
 const CustomerRouter = require("../apps/customers/router");
 const CommentRouter = require("../apps/comments/router");
+const CartItemRouter = require("../apps/cartItems/router");
+const OrderController = require("../apps/orders/controller");
+const OrderRouter = require("../apps/orders/router");
+const InventoryRouter = require("../apps/inventories/router");
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads');
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + uuid() + '.' + file.originalname.split('.').slice(-1)[0]);
+    }
+})
+
+const upload = multer({storage: storage});
 
 module.exports = {
     routers: {},
@@ -59,6 +77,18 @@ module.exports = {
             paymentMethodRouter: new PaymentMethodRouter('/paymentMethods', Controllers.PaymentMethodController, app),
             customerRouter: new CustomerRouter('/customers', Controllers.CustomerController, app),
             commentRouter: new CommentRouter('/comments', Controllers.CommentController, app),
+            cartItemRouter: new CartItemRouter('/cartItems', Controllers.CartItemController, app),
+            orderRouter: new OrderRouter('/orders', Controllers.OrderController, app),
+            inventoryRouter: new InventoryRouter('/inventories', Controllers.InventoryController, app),
+            fileUpload: app.post("/fileUpload", upload.array("files"), (req, res) => {
+                return success(res, req.files.map((file) => {
+                    return {
+                        original: file.originalname,
+                        path: file.path.replaceAll('\\', '/'),
+                        size: file.size,
+                    }
+                }));
+            }),
         };
     },
     Admin: {
@@ -83,5 +113,8 @@ module.exports = {
     DiscountRouter,
     PaymentMethodRouter,
     CustomerRouter,
-    CommentRouter
+    CommentRouter,
+    CartItemRouter,
+    OrderRouter,
+    InventoryRouter,
 };

@@ -55,6 +55,19 @@ module.exports = {
                         break;
                 }
                 break;
+            case 'SequelizeUniqueConstraintError':
+                switch (errorCode){
+                    case '23505':
+
+                        const alreadyExistsRegex = /^Key \((.*?)\)=\((.*?)\) already exists.$/;
+                        if(alreadyExistsRegex.test(errorDetail)){
+                            const error = alreadyExistsRegex.exec(errorDetail);
+                            customError = {message: `'${err.original?.table}(${error[1]}=${error[2]})' is already exists!`, code: ERROR_CODES.ALREADY_EXISTS};
+                        }
+
+                        break;
+                }
+                break;
         }
 
         if(customError === null){

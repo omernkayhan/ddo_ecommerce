@@ -42,6 +42,9 @@ module.exports = {
                     case 'DATE':
                         type = 'string';
                         break;
+                    case 'ENUM':
+                        type = ['number', 'integer', 'string', 'boolean', 'array', 'object'];
+                        break;
                 }
 
                 if (type !== null && type !== 'enum') {
