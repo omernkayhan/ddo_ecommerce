@@ -102,7 +102,7 @@ export function DataTable<TData, TValue>({
             <div className="flex items-center justify-end space-x-2 py-4">
                 {
                     Array.from({length: totalPages}, (_, i) => i + 1).map((page) => (
-                        <Button onClick={changePage(page)} variant={currentPage === page ? "" : "secondary"}>{page}</Button>
+                        <Button onClick={changePage(page)} variant={currentPage === page ? "default" : "secondary"}>{page}</Button>
                     ))
                 }
             </div>
