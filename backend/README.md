@@ -35,6 +35,7 @@ Now that we understand operators, let's see how we can use operators.
 | **Request** | **Parameters** |
 | --- | --- |
 | `/endpoint?attributeName__gt=value` | `{"attributeName": {$gt: "value"}}` |
+| `/endpoint?sample.nested.attribute__gt=value` | `{"sample": {"nested": {"attribute": {$gt: "value"}}}}` |
 
 ## Limit & Pagination
 
@@ -65,9 +66,8 @@ If the requested object has the `ID` attribute, the `__order` property is set to
     "data": {
         "totalItems": 3,
         "items": [
-            { ... },
-            { ... },
-            ...
+            { /* item */ }
+            //...
         ],
         "totalPages": 1,
         "currentPage": 1
@@ -82,7 +82,7 @@ If the requested object has the `ID` attribute, the `__order` property is set to
 {
     "status": true,
     "data": {
-        ...
+        //...
     }
 }
 
@@ -96,10 +96,10 @@ If the requested object has the `ID` attribute, the `__order` property is set to
     "data": {
         "error": {
             "message": "Error Message",
-            "code": <optional>,
-            "details": <optional>{
-                "name": <optional>,
-                "code": <optional>
+            "code": "1234", /* optional */
+            "details": /* optional */{
+                "name": "detailName",   /* optional */
+                "code": "detailCode"    /* optional */
             }
         }
     }
