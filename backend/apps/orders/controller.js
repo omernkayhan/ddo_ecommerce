@@ -26,7 +26,7 @@ class OrderController extends Controller {
         required: ['number', 'status', 'total', 'totalCurrency', 'customer', 'items']
     };
     updatePayload = {
-        properties: ['star', 'comment', ['customer', {type: 'integer'}], ['listing', {type: 'integer'}]],
+        properties: ['star', 'status', 'comment', ['customer', {type: 'integer'}], ['listing', {type: 'integer'}]],
         additionalProperties: false
     };
 

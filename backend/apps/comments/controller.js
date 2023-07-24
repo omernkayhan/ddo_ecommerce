@@ -72,7 +72,7 @@ class CommentController extends Controller {
         if (req.user.role.code !== 'customer') next();
         req.body.customer = req.user.customer.id;
 
-        super.update(req, res, async (Customer) => {
+        super.update(req, res, async (comment) => {
             if (typeof req.body.customer !== 'undefined') await comment.setCustomer(req.body.customer);
             if (typeof req.body.listing !== 'undefined') await comment.setListing(req.body.listing);
         });

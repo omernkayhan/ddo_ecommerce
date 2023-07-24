@@ -81,6 +81,7 @@ module.exports = {
             orderRouter: new OrderRouter('/orders', Controllers.OrderController, app),
             inventoryRouter: new InventoryRouter('/inventories', Controllers.InventoryController, app),
             fileUpload: app.post("/fileUpload", upload.array("files"), (req, res) => {
+                console.log(req.files)
                 return success(res, req.files.map((file) => {
                     return {
                         original: file.originalname,

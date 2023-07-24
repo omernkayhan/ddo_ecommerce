@@ -22,6 +22,7 @@ class TaxController extends Controller {
         additionalProperties: false
     };
 
+    listSerializer = {attributes: {exclude: ['valueCurrencyCode']}, include: {model: Currency, as: 'valueCurrency'}};
     detailSerializer = {attributes: {exclude: ['valueCurrencyCode']}, include: {model: Currency, as: 'valueCurrency'}};
 
     create(req, res) {
