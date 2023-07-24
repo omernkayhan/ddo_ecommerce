@@ -116,7 +116,7 @@ const PRODUCT = {
         }, {
             model: Product,
             as: 'product',
-            attributes: {exclude: ['categoryId']},
+            attributes: {exclude: ['categoryId', 'createdAt', 'updatedAt']},
             include: [{model: ProductCategory, as: 'category'}, {
                 model: ProductImage,
                 as: 'images',

@@ -11,11 +11,7 @@ const PaymentMethod = require("../../common/models/PaymentMethod");
 
 class PaymentMethodController extends Controller {
     defaultModel = PaymentMethod;
-
-    listPayload = {
-        properties: ['id', 'name', 'logo', 'description', 'minPrice', 'maxPrice', 'fee', 'active'],
-        additionalProperties: false
-    };
+    
 
     createPayload = {
         properties: ['name', 'logo', 'description', 'minPrice', 'maxPrice', 'fee', 'active', ['availableCountries', {type: 'array', uniqueItems: true, items: {type: "string"}}], ['feeCurrency', {type: 'string'}], ['priceCurrency', {type: 'string'}]],

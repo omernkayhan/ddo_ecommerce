@@ -9,8 +9,7 @@ const Permission = require("../../../common/models/Permission");
 
 class PermissionController extends Controller {
     defaultModel = Permission;
-
-    listPayload = {properties: ['id', 'code', 'name', 'description'], additionalProperties: false};
+    
     createPayload = {
         properties: ['code', 'name', 'description'],
         additionalProperties: false,

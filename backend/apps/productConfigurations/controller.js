@@ -14,11 +14,7 @@ const ProductConfigurationValue = require("../../common/models/ProductConfigurat
 
 class ProductConfigurationController extends Controller {
     defaultModel = ProductConfiguration;
-
-    listPayload = {
-        properties: ['id', 'name', ['type', {enum: PRODUCT.CONFIGURATION_TYPE_OPTIONS}], 'active', ['category', {type: 'integer'}]],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['name', ['type', {enum: PRODUCT.CONFIGURATION_TYPE_OPTIONS}], 'active', ['category', {type: 'integer'}], ['values', {type: 'array', minItems: 1, uniqueItems: true, items: {type: "string"}}]],
         additionalProperties: false,
@@ -28,8 +24,8 @@ class ProductConfigurationController extends Controller {
         properties: ['name', ['type', {enum: PRODUCT.CONFIGURATION_TYPE_OPTIONS}], 'active', ['category', {type: 'integer'}], ['values', {type: 'array', minItems: 1, uniqueItems: true, items: {type: "string"}}]],
         additionalProperties: false
     };
-    listSerializer = {include: [{model: ProductConfigurationValue, as: 'values'}]};
-    detailSerializer = {include: [{model: ProductCategory, as: 'category'}, {model: ProductConfigurationValue, as: 'values'}], attributes: {exclude: ['categoryId']}};
+    listSerializer = {include: [{model: ProductConfigurationValue, as: 'values', attributes: {exclude: ['createdAt', 'updatedAt', 'configurationId']}}]};
+    detailSerializer = {include: [{model: ProductCategory, as: 'category'}, {model: ProductConfigurationValue, as: 'values', attributes: {exclude: ['createdAt', 'updatedAt', 'configurationId']}}], attributes: {exclude: ['categoryId']}};
 
     create(req, res) {
         super.create(req, res, async (configuration) => {

@@ -12,11 +12,7 @@ const {error} = require("../../common/Response");
 
 class ShipmentMethodController extends Controller {
     defaultModel = ShipmentMethod;
-
-    listPayload = {
-        properties: ['id', 'name', 'logo', 'description', 'minWeight', 'maxWeight', 'price', 'active'],
-        additionalProperties: false
-    };
+    
 
     createPayload = {
         properties: ['name', 'logo', 'description', 'minWeight', 'maxWeight', 'price', 'active', ['availableCountries', {type: 'array', uniqueItems: true, items: {type: "string"}}], ['priceCurrency', {type: 'string'}]],

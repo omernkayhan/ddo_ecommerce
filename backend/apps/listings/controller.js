@@ -27,11 +27,7 @@ const {Op} = require("sequelize");
 
 class ListingController extends Controller {
     defaultModel = Listing;
-
-    listPayload = {
-        properties: ['id', 'price', ['configuredProduct', {type: 'string'}], ['priceCurrency', {type: 'string'}], 'listingStartDateTime', ['product', {type: 'string'}], ['configurations', {type: ['object', 'array']}]],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['price', ['configuredProduct', {type: 'number'}], ['priceCurrency', {type: 'string'}], 'listingStartDateTime'],
         additionalProperties: false,

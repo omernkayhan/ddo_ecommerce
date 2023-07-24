@@ -45,5 +45,6 @@ syncDB(sequelize).then(() => {
     app.listen(APP_PORT, () => {});
 
 }).catch((e) => {
+    console.log(e)
     logger.error("App Error: " + e.toString());
 })

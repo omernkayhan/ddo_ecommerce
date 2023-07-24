@@ -7,7 +7,7 @@
 const {Sequelize, Model} = require("sequelize");
 const {options} = require("pg/lib/defaults");
 const {Logger} = require("sequelize/lib/utils/logger");
-const sequelize = new Sequelize('postgres://ddo_ecommerce_backend:1234@localhost:5432/ddo_ecommerce', {logging: false, force: false, minifyAliases: true});
+const sequelize = new Sequelize('postgres://ddo_ecommerce_backend:1234@localhost:5432/ddo_ecommerce', {logging: true, force: false, minifyAliases: true});
 
 class DataModel extends Model{
 
@@ -15,7 +15,10 @@ class DataModel extends Model{
     static attributes = {};
     static options = {};
 
-    static listPayload = {};
+    static listPayload = {
+        properties: [],
+        additionalProperties: true
+    };
     static createPayload = {};
     static updatePayload = {};
 

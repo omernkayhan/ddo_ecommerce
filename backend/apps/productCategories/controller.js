@@ -9,8 +9,7 @@ const ProductCategory = require("../../common/models/ProductCategory");
 
 class ProductCategoryController extends Controller {
     defaultModel = ProductCategory;
-
-    listPayload = {properties: ['id', 'name', ['parent', {type: 'number'}], 'active', 'sefLink'], additionalProperties: false};
+    
     createPayload = {
         properties: ['name', ['parent', {type: 'number'}], 'active', 'sefLink'],
         additionalProperties: false,

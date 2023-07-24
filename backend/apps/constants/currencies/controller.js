@@ -10,11 +10,7 @@ const Currency = require("../../../common/models/Currency");
 
 class CurrencyController extends Controller {
     defaultModel = Currency;
-
-    listPayload = {
-        properties: ['code', 'name'],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['code', 'name'],
         additionalProperties: false,

@@ -13,11 +13,7 @@ const {success, sequelizeError} = require("../../common/Response");
 
 class CartItemController extends Controller {
     defaultModel = CartItem;
-
-    listPayload = {
-        properties: [],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: [['items', {type: 'object'}]],
         additionalProperties: false,

@@ -13,34 +13,10 @@ const Role = require("../../common/models/Role");
 
 class CustomerController extends Controller {
     defaultModel = Customer;
-
-    listPayload = {
-        properties: [
-            'id',
-            'customerCustomData',
-            [
-                'user',
-                {
-                    type: 'object',
-                    properties: {
-                        username: {type: 'string'},
-                        password: {type: 'string'},
-                        name: {type: 'string'},
-                        surname: {type: 'string'},
-                        email: {type: 'string'},
-                        phone: {type: 'string'},
-                        active: {type: 'boolean'},
-                    },
-                    additionalProperties: false,
-                }
-            ]
-        ],
-        additionalProperties: false,
-
-    };
+    
     createPayload = {
         properties: [
-            'customerCustomData',
+            'address',
             [
                 'user',
                 {
@@ -60,11 +36,11 @@ class CustomerController extends Controller {
             ]
         ],
         additionalProperties: false,
-        required: ['customerCustomData', 'user']
+        required: ['address', 'user']
     };
     updatePayload = {
         properties: [
-            'customerCustomData',
+            'address',
             [
                 'user',
                 {
@@ -86,7 +62,7 @@ class CustomerController extends Controller {
     };
 
     listSerializer = {
-        include: [{...USER.INCLUDE_BASIC_LEVEL, as: 'user'}], attributes: {exclude: ['userId', 'storeId']}
+        include: [{...USER.INCLUDE_BASIC_LEVEL, as: 'user', include: [{model: Role, as: 'role'}]}], attributes: {exclude: ['userId', 'storeId']}
     };
     detailSerializer = {
         include: [{...USER.INCLUDE_VENDOR_BASIC, as: 'user'}], attributes: {exclude: ['userId', 'storeId']}

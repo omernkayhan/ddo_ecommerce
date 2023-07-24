@@ -19,11 +19,7 @@ const PaymentMethod = require("../../common/models/PaymentMethod");
 
 class OrderController extends Controller {
     defaultModel = Order;
-
-    listPayload = {
-        properties: ['id', 'number', 'status', 'total', 'totalCurrency', 'customer'],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['number', 'status', 'total', ['totalCurrency', {type: 'string'}], ['customer', {type: 'integer'}], ['items', {type: 'array'}], ['payment', {type: 'object'}]],
         additionalProperties: false,
@@ -100,6 +96,8 @@ class OrderController extends Controller {
     }
 
     create(req, res, next) {
+        if (req.user.role.code === 'customer') req.body.customer = req.user.customer.id;
+
         super.create(req, res, async (order) => {
             const body = req.body;
             await order.setTotalCurrency(body.totalCurrency);
@@ -125,6 +123,12 @@ class OrderController extends Controller {
                 orderId: order.id
             });
         });
+    }
+
+    update(req, res, next) {
+        if (req.user.role.code === 'customer') req.body.customer = req.user.customer.id;
+
+        super.update(req, res);
     }
 
 }

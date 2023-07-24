@@ -10,8 +10,8 @@ const {DataModel, sequelize} = require("../db");
 class Customer extends DataModel {
     static modelName = 'Customer';
     static attributes = {
-        customerCustomData: {
-            type: DataTypes.STRING(50)
+        address: {
+            type: DataTypes.STRING(200)
         }
     };
 }

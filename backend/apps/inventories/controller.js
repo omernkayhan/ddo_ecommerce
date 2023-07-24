@@ -11,11 +11,7 @@ const Order = require("../../common/models/Order");
 
 class InventoryController extends Controller {
     defaultModel = Order;
-
-    listPayload = {
-        properties: ['id', 'number', 'status', 'total', 'totalCurrency', 'customer'],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['number', 'status', 'total', ['totalCurrency', {type: 'integer'}], ['customer', {type: 'integer'}], ['items', {type: 'object'}]],
         additionalProperties: false,

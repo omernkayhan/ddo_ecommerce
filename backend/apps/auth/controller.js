@@ -21,6 +21,7 @@ const jwt = require("jsonwebtoken");
 
 class AuthController extends Controller {
     defaultModel = User;
+    
 
     async register(req, res) {
         const payload = req.body;

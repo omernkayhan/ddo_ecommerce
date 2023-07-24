@@ -27,7 +27,6 @@ module.exports = {
         for (const [column, orderType] of Object.entries(order)) {
             req.order.push([column, orderType]);
         }
-        console.log(req.order);
 
         next();
     }

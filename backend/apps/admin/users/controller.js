@@ -13,11 +13,8 @@ const {USER_ATTRIBUTES, USER} = require("../../../common/serializer");
 
 class UserController extends Controller {
     defaultModel = User;
+    
 
-    listPayload = {
-        properties: ['id', ['role', {type: 'number'}], 'username', 'name', 'surname', 'email', 'phone', 'active'],
-        additionalProperties: false
-    };
     createPayload = {
         properties: [['role', {type: 'number'}], 'username', 'password', 'name', 'surname', 'email', 'phone', 'active'],
         additionalProperties: false,

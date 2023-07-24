@@ -12,7 +12,6 @@ const {ROLE} = require("../../../common/serializer");
 class RoleController extends Controller {
     defaultModel = Role;
 
-    listPayload = {properties: ['id', 'code', 'name', 'description', ['permissions', {type: 'array', uniqueItems: true, items: {type: "number"}}]], additionalProperties: false};
     createPayload = {
         properties: ['code', 'name', 'description', ['permissions', {type: 'array', uniqueItems: true, items: {type: "number"}}]],
         additionalProperties: false,

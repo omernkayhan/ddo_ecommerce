@@ -10,11 +10,7 @@ const Country = require("../../../common/models/Country");
 
 class CountryController extends Controller {
     defaultModel = Country;
-
-    listPayload = {
-        properties: ['code', 'name'],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['code', 'name'],
         additionalProperties: false,

@@ -29,7 +29,7 @@ module.exports = {
                     operator = (operator === 'notRegexp') ? 'notIRegexp' : operator;
                 }
                 value = {
-                    [Op[operator]]: value
+                    ['Op.' + operator]: value
                 };
                 key = key.split('__')[0];
             }

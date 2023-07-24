@@ -13,16 +13,12 @@ const {USER} = require("../../common/serializer");
 
 class StoreController extends Controller {
     defaultModel = Store;
-
-    listPayload = {
-        properties: ['id', 'title', 'storeName', 'address', 'addressCity', 'logo', 'taxId', 'taxOffice', 'active'],
-        additionalProperties: false
-    };
+    
 
     createPayload = {
         properties: ['title', 'storeName', 'address', 'addressCity', 'logo', 'taxId', 'taxOffice', 'active'],
         additionalProperties: false,
-        required: ['title', 'storeName', 'address_city', 'logo', 'tax_id', 'tax_office', 'active']
+        required: ['title', 'storeName', 'addressCity', 'logo', 'taxId', 'taxOffice']
     };
 
     updatePayload = {

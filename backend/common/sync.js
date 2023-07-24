@@ -155,7 +155,7 @@ module.exports = {
         //ConfiguredProduct Model
         await ConfiguredProduct.init();
         await sequelize.models.Product.hasMany(sequelize.models.ConfiguredProduct, {
-            as: 'configuredProducts',
+            as: 'product',
             foreignKey: 'productId'
         });
         await sequelize.models.ConfiguredProduct.belongsTo(sequelize.models.Product, {

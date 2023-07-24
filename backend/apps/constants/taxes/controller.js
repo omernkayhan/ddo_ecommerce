@@ -11,11 +11,7 @@ const Currency = require("../../../common/models/Currency");
 
 class TaxController extends Controller {
     defaultModel = Tax;
-
-    listPayload = {
-        properties: ['id', 'name', ['type', {enum: ['fixed', 'proportional']}], ['valueCurrency', {type: 'string'}], 'value', 'active'],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['name', ['type', {enum: ['fixed', 'proportional']}], ['valueCurrency', {type: 'string'}], 'value', 'active'],
         additionalProperties: false,

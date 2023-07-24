@@ -18,11 +18,7 @@ const {success, sequelizeError} = require("../../common/Response");
 
 class ConfiguredProductController extends Controller {
     defaultModel = ConfiguredProduct;
-
-    listPayload = {
-        properties: ['id', 'active', 'weight', ['vendor', {type: 'number'}], ['product', {type: 'number'}], ['configurations', {type: 'object'}]],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['active', 'weight', ['vendor', {type: 'number'}], ['product', {type: 'number'}], ['configurations', {type: 'object'}]],
         additionalProperties: false,

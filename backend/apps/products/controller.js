@@ -13,15 +13,11 @@ const {PRODUCT} = require("../../common/serializer");
 
 class ProductController extends Controller {
     defaultModel = Product;
-
-    listPayload = {
-        properties: ['id', 'sku', 'name', 'shortDescription', 'description', 'sefLink', 'online', 'active', ['category', {type: 'integer'}], ['images', {type: 'array'}], ['taxes', {type: 'array'}]],
-        additionalProperties: false,
-    };
+    
     createPayload = {
         properties: ['sku', 'name', 'shortDescription', 'description', 'sefLink', 'online', 'active', ['category', {type: 'integer'}], ['images', {type: 'array'}], ['taxes', {type: 'array'}]],
         additionalProperties: false,
-        required: ['sku', 'name', 'shortDescription', 'description', 'sefLink', 'online', 'active', 'category']
+        required: ['sku', 'name', 'shortDescription', 'description', 'sefLink', 'online', 'category']
     };
     updatePayload = {
         properties: ['sku', 'name', 'shortDescription', 'description', 'sefLink', 'online', 'active', ['category', {type: 'integer'}], ['images', {type: 'array'}], ['taxes', {type: 'array'}]],

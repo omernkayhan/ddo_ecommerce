@@ -60,7 +60,7 @@ module.exports = {
         let payload = {
             type: 'object',
             properties: attributes,
-            additionalProperties: false
+            additionalProperties: payloadInformation.additionalProperties ?? false
         };
 
         if(typeof payloadInformation.required !== 'undefined'){

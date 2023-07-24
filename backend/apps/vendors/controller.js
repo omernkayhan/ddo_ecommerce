@@ -14,32 +14,7 @@ const Role = require("../../common/models/Role");
 
 class VendorController extends Controller {
     defaultModel = Vendor;
-
-    listPayload = {
-        properties: [
-            'id',
-            'vendorCustomData',
-            ['store', {type: 'integer'}],
-            [
-                'user',
-                {
-                    type: 'object',
-                    properties: {
-                        username: {type: 'string'},
-                        password: {type: 'string'},
-                        name: {type: 'string'},
-                        surname: {type: 'string'},
-                        email: {type: 'string'},
-                        phone: {type: 'string'},
-                        active: {type: 'boolean'},
-                    },
-                    additionalProperties: false,
-                }
-            ]
-        ],
-        additionalProperties: false,
-
-    };
+    
     createPayload = {
         properties: [
             'vendorCustomData',
