@@ -4,9 +4,6 @@
 * created date: 12/07/2023
 */
 
-const {Op} = require("sequelize");
-const {DATABASE} = require("../config");
-
 function decodeURIComponentSafe(s) {
     if (!s) {
         return s;
@@ -22,7 +19,7 @@ module.exports = {
 
             if(key.indexOf('__') > -1) {
                 let operator = key.split('__')[1];
-                if(DATABASE.DIALECT === 'postgres') {
+                if(process.env.DB_DIALECT === 'postgres') {
                     operator = (operator === 'like') ? 'iLike' : operator;
                     operator = (operator === 'notLike') ? 'notILike' : operator;
                     operator = (operator === 'regexp') ? 'iRegexp' : operator;

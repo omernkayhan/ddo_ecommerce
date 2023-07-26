@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const {JWT_ACCESS_SECRET} = require("../config");
 const {logger} = require("./logger");
 const UserToken = require("../models/UserToken");
 
@@ -41,8 +40,8 @@ module.exports = {
             })
         }
 
-        jwt.verify(token, JWT_ACCESS_SECRET, async (err, user) => {
-            if (err || await UserToken.findOne({accessToken: token}) === null) {
+        jwt.verify(token, process.env.JWT_ACCESS_SECRET, async (err, user) => {
+            if (err || await UserToken.findOne({where: {accessToken: token}}) === null) {
                 return res.status(403).json({
                     status: false,
                     error: {

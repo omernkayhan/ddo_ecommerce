@@ -12,7 +12,6 @@ const ShipmentMethod = require("./models/ShipmentMethod");
 const User = require("./models/User");
 
 const {sequelize} = require("./db");
-const {DEV} = require("./config");
 const Currency = require("./models/Currency");
 const Store = require("./models/Store");
 const Vendor = require("./models/Vendor");
@@ -354,7 +353,7 @@ module.exports = {
             foreignKey: 'orderId'
         });
 
-        if (!DEV) {
+        if (process.env.DEV === 'false') {
             return true;
         }
         return await sequelize.sync();

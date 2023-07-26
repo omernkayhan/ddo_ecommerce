@@ -8,7 +8,6 @@ const {DataTypes} = require("sequelize");
 const {DataModel, sequelize} = require("../db");
 const Role = require("./Role");
 const bcrypt = require("bcrypt");
-const {BCRYPT_SALT_ROUNDS} = require("../config");
 
 class Listing extends DataModel {
     static modelName = 'Listing';

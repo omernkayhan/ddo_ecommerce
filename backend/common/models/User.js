@@ -8,7 +8,6 @@ const {DataTypes} = require("sequelize");
 const {DataModel, sequelize} = require("../db");
 const Role = require("./Role");
 const bcrypt = require("bcrypt");
-const {BCRYPT_SALT_ROUNDS} = require("../config");
 
 class User extends DataModel {
     static modelName = 'User';
@@ -27,7 +26,7 @@ class User extends DataModel {
             type: DataTypes.STRING(100),
             allowNull: false,
             set(password) {
-                const salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
+                const salt = bcrypt.genSaltSync(parseInt(process.env.BCRYPT_SALT_ROUNDS));
                 password = bcrypt.hashSync(password, salt);
                 this.setDataValue('password', password);
             }

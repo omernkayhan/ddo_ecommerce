@@ -8,7 +8,7 @@ const {DataTypes} = require("sequelize");
 const {DataModel, sequelize} = require("../db");
 const Role = require("./Role");
 const bcrypt = require("bcrypt");
-const {BCRYPT_SALT_ROUNDS, PRODUCT} = require("../config");
+const {PRODUCT} = require("../config");
 
 class ProductConfiguration extends DataModel {
     static modelName = 'ProductConfiguration';

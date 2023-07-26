@@ -9,7 +9,6 @@ const {Op} = require("sequelize");
 const {success, sequelizeError, error} = require("./Response");
 const {buildPageResult} = require("./middleware/PageResultBuilder");
 const {buildCondition} = require("./middleware/ConditionBuilder");
-const {DEFAULT_ACTIVE_LISTING} = require("./config");
 
 class Controller {
 
@@ -88,7 +87,7 @@ class Controller {
             }
         };
 
-        if (typeof this.defaultModel.attributes.active !== 'undefined' && typeof realSearch.where.active === 'undefined' && DEFAULT_ACTIVE_LISTING === true) {
+        if (typeof this.defaultModel.attributes.active !== 'undefined' && typeof realSearch.where.active === 'undefined' && process.env.DEFAULT_ACTIVE_LISTING === 'true') {
             realSearch.where.active = true;
         }
 

@@ -8,7 +8,6 @@
 const Controller = require("../../common/Controller");
 const Product = require("../../common/models/Product");
 const ProductCategory = require("../../common/models/ProductCategory");
-const {PRODUCT, DEFAULT_ACTIVE_LISTING} = require("../../common/config");
 const serializer = require("../../common/serializer");
 const ConfiguredProduct = require("../../common/models/ConfiguredProduct");
 const ProductConfiguration = require("../../common/models/ProductConfiguration");

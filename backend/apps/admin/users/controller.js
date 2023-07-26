@@ -7,8 +7,6 @@
 const Controller = require("../../../common/Controller");
 const User = require("../../../common/models/User");
 const Role = require("../../../common/models/Role");
-const bcrypt = require("bcrypt");
-const {BCRYPT_SALT_ROUNDS} = require("../../../common/config");
 const {USER_ATTRIBUTES, USER} = require("../../../common/serializer");
 
 class UserController extends Controller {

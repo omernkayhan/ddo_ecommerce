@@ -7,7 +7,7 @@
 const {Sequelize, Model} = require("sequelize");
 const {options} = require("pg/lib/defaults");
 const {Logger} = require("sequelize/lib/utils/logger");
-const sequelize = new Sequelize('postgres://ddo_ecommerce_backend:1234@localhost:5432/ddo_ecommerce', {logging: false, force: false, minifyAliases: true});
+const sequelize = new Sequelize(`${process.env.DB_DIALECT}://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`, {logging: false, force: false, minifyAliases: true});
 
 class DataModel extends Model{
 

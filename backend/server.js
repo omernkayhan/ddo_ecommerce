@@ -4,14 +4,14 @@
 * created date: 11/07/2023
 */
 
+require('dotenv').config();
+
 const Express = require("express");
 const app = Express();
 const cors = require("cors");
 const compression = require('compression');
 
 const {syncDB} = require("./common/sync");
-
-const {APP_PORT, DEFAULT_PAGE_ITEM_COUNT} = require("./common/config");
 
 const {sequelize, DataModel} = require('./common/db');
 const {DataTypes} = require("sequelize");
@@ -23,8 +23,29 @@ const test = require("./test");
 const {logger} = require("./common/middleware/logger");
 const {generate} = require("./common/middleware/ListEngine");
 const path = require("path");
+const Role = require("./common/models/Role");
+const User = require("./common/models/User");
 
-syncDB(sequelize).then(() => {
+syncDB(sequelize).then(async () => {
+
+    if (await Role.count({where: {code: 'sysadmin'}}) === 0) {
+        const role = await Role.create({code: 'sysadmin', name: 'System Admin', description: 'System Admin'});
+        if (await User.count() === 0) {
+            await User.create(
+                {
+                    username: 'sysadmin',
+                    password: '1234',
+                    name: 'System',
+                    surname: 'Admin',
+                    email: 'admin@system',
+                    phone: 'phone',
+                    active: true,
+                    roleId: role.id,
+                }
+            );
+
+        }
+    }
 
     app.use(cors());
     app.use(Express.json());
@@ -42,7 +63,8 @@ syncDB(sequelize).then(() => {
         error(res, `Invalid Request: Cannot ${req.method} ${req.path}`, {}, 404);
     });
 
-    app.listen(APP_PORT, () => {});
+    app.listen(parseInt(process.env.APP_PORT), () => {
+    });
 
 }).catch((e) => {
     console.log(e)
