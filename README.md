@@ -14,5 +14,5 @@
 3. pgAdmin
 4. NGINX
 
-## [Backend](/tree/master/backend)
+## [Backend](https://github.com/omernkayhan/ddo_ecommerce/tree/master/backend)
 ## [Api Documentation](https://documenter.getpostman.com/view/16499947/2s946e9D1Q)
