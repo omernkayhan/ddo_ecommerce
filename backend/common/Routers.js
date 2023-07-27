@@ -10,13 +10,13 @@ const {authenticateCheck} = require("./middleware/IsAuthenticatedMiddleware");
 const multer = require("multer");
 const {uuid} = require('uuidv4');
 
+const Controllers = require("./Controllers");
 const AuthRouter = require("../apps/auth/router");
 const RoleRouter = require("../apps/admin/roles/router");
 const PermissionRouter = require("../apps/admin/permissions/router");
 const UserRouter = require("../apps/admin/users/router");
 const ProductCategoryRouter = require("../apps/productCategories/router");
 const ShipmentMethodRouter = require("../apps/shipmentMethods/router");
-const Controllers = require("./Controllers");
 const StoreRouter = require("../apps/stores/router");
 const VendorRouter = require("../apps/vendors/router");
 const ProductRouter = require("../apps/products/router");
@@ -31,7 +31,6 @@ const PaymentMethodRouter = require("../apps/paymentMethods/router");
 const CustomerRouter = require("../apps/customers/router");
 const CommentRouter = require("../apps/comments/router");
 const CartItemRouter = require("../apps/cartItems/router");
-const OrderController = require("../apps/orders/controller");
 const OrderRouter = require("../apps/orders/router");
 const InventoryRouter = require("../apps/inventories/router");
 
