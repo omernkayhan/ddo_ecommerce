@@ -52,8 +52,7 @@ module.exports = {
 
             req.user = user;
 
-
-            if (false && (req.user.role.code !== 'sysadmin' && !req.user.role.permissions.includes(permissionName))) {
+            if (req.user.role.code !== 'sysadmin' && !req.user.role.permissions.includes(permissionName)) {
                 return res.status(403).json({
                     status: false,
                     error: {
