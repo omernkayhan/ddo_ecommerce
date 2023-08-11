@@ -14,9 +14,6 @@ const {error, success} = require("../../common/Response");
 const {generateAccessToken, generateRefreshToken} = require("../../common/middleware/Token");
 const {ROLE} = require("../../common/serializer");
 const UserToken = require("../../common/models/UserToken");
-const Customer = require("../../common/models/Customer");
-const Vendor = require("../../common/models/Vendor");
-const Store = require("../../common/models/Store");
 const jwt = require("jsonwebtoken");
 
 class AuthController extends Controller {

@@ -7,16 +7,6 @@
 const Role = require("./models/Role");
 const User = require("./models/User");
 const Permission = require("./models/Permission");
-const ProductCategory = require("./models/ProductCategory");
-const ProductImage = require("./models/ProductImage");
-const Product = require("./models/Product");
-const ProductConfiguration = require("./models/ProductConfiguration");
-const Tax = require("./models/Tax");
-const Currency = require("./models/Currency");
-const Vendor = require("./models/Vendor");
-const Store = require("./models/Store");
-const Discount = require("./models/Discount");
-const ConfiguredProduct = require("./models/ConfiguredProduct");
 
 const PERMISSION_ATTRIBUTES = {
     BASIC_LEVEL: ['id', 'code', 'name']
@@ -68,125 +58,8 @@ const USER = {
         attributes: [...USER_ATTRIBUTES.BASIC_LEVEL, 'email', 'phone', 'active', 'createdAt', 'updatedAt'],
     },
 };
-
-const PRODUCT_ATTRIBUTES = {
-    BASIC_LEVEL: {exclude: ['description', 'shortDescription', 'categoryId']}
-};
-
-const PRODUCT = {
-    INCLUDE_BASIC_LEVEL: {
-        attributes: PRODUCT_ATTRIBUTES.BASIC_LEVEL,
-        include: [{model: ProductCategory, as: 'category'}, {
-            model: ProductImage,
-            as: 'images',
-            attributes: ['id', 'path']
-        }, {
-            model: Tax,
-            as: 'taxes',
-            attributes: {exclude: ['valueCurrencyCode']},
-            include: {model: Currency, as: 'valueCurrency'},
-            through: {attributes: []}
-        }]
-    },
-    INCLUDE_DETAIL: {
-        attributes: {exclude: ['categoryId']},
-        include: [{model: ProductCategory, as: 'category'}, {
-            model: ProductImage,
-            as: 'images',
-            attributes: ['id', 'path']
-        }, {
-            model: Tax,
-            as: 'taxes',
-            attributes: {exclude: ['valueCurrencyCode']},
-            include: {model: Currency, as: 'valueCurrency'},
-            through: {attributes: []}
-        }]
-    },
-    INCLUDE_FULL: {
-        attributes: {exclude: ['productId', 'vendorId']},
-        include: [{
-            model: Vendor,
-            as: 'vendor',
-            attributes: [],
-            include: {
-                model: Store,
-                as: 'store',
-                attributes: ['id', 'storeName', 'logo', 'createdAt']
-            }
-        }, {
-            model: Product,
-            as: 'product',
-            attributes: {exclude: ['categoryId', 'createdAt', 'updatedAt']},
-            include: [{model: ProductCategory, as: 'category'}, {
-                model: ProductImage,
-                as: 'images',
-                attributes: ['path']
-            }, {
-                model: Tax,
-                as: 'taxes',
-                attributes: {exclude: ['valueCurrencyCode']},
-                include: {model: Currency, as: 'valueCurrency'},
-                through: {attributes: []}
-            }]
-        }, {
-            model: ProductConfiguration,
-            as: 'configurations',
-            attributes: ['id', 'name', 'type'],
-            through: {as: 'configurationValue', attributes: ['value']}
-        }, {
-            model: Discount,
-            as: 'discounts',
-            attributes: ['name', 'type', 'value', 'active']
-        }]
-    },
-    INCLUDE_FULL_CONFIGURED_PRODUCT: {
-        attributes: {exclude: ['configuredProductId', 'priceCurrencyCode']},
-        include: [
-            {model: Currency, as: 'priceCurrency'},
-            {
-                model: ConfiguredProduct, as: 'configuredProduct', attributes: {exclude: ['productId', 'vendorId']},
-                include: [{
-                    model: Vendor,
-                    as: 'vendor',
-                    attributes: [],
-                    include: {
-                        model: Store,
-                        as: 'store',
-                        attributes: ['id', 'storeName', 'logo', 'createdAt']
-                    }
-                }, {
-                    model: Product,
-                    as: 'product',
-                    attributes: {exclude: ['categoryId']},
-                    include: [{model: ProductCategory, as: 'category'}, {
-                        model: ProductImage,
-                        as: 'images',
-                        attributes: ['path']
-                    }, {
-                        model: Tax,
-                        as: 'taxes',
-                        attributes: {exclude: ['valueCurrencyCode']},
-                        include: {model: Currency, as: 'valueCurrency'},
-                        through: {attributes: []}
-                    }]
-                }, {
-                    model: ProductConfiguration,
-                    as: 'configurations',
-                    attributes: ['id', 'name', 'type'],
-                    through: {as: 'configurationValue', attributes: ['value']}
-                }, {
-                    model: Discount,
-                    as: 'discounts',
-                    attributes: ['name', 'type', 'value', 'active']
-                }]
-            }
-        ]
-    }
-};
-
 module.exports = {
     PERMISSION_ATTRIBUTES, PERMISSION,
     ROLE_ATTRIBUTES, ROLE,
-    USER_ATTRIBUTES, USER,
-    PRODUCT_ATTRIBUTES, PRODUCT,
+    USER_ATTRIBUTES, USER
 };

@@ -48,6 +48,7 @@ syncDB(sequelize).then(async () => {
     });
 
     app.listen(parseInt(process.env.APP_PORT), () => {
+        logger.info(`App listening on port ${process.env.APP_PORT}!`);
     });
 
 }).catch((e) => {

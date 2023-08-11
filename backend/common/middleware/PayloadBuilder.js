@@ -3,7 +3,6 @@
 * created by: Ömer Necmi KAYHAN
 * created date: 13/07/2023
 */
-const Product = require("../models/Product");
 module.exports = {
     buildPayload: (model, payloadInformation) => {
 
